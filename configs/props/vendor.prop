@@ -150,6 +150,7 @@ persist.vendor.qcom.bluetooth.soc=hastings
 ro.vendor.bluetooth.wipower=false
 ro.bluetooth.a2dp_offload.supported=true
 ro.vendor.bt.bdaddr_path=/data/vendor/etc/bluetooth_bdaddr
+persist.vendor.bt.a2dp.hal.implementation=true
 
 # Camera
 vendor.camera.enable.uvc=true
