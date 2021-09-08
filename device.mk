@@ -518,9 +518,12 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle
 
 # Thermal
+ifeq ($(TARGET_USE_QTI_THERMAL_SERVICE),true)
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.qti
+endif
 
+# Thermal Engine
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/power/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
