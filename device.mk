@@ -450,7 +450,8 @@ PRODUCT_PACKAGES += \
 
 # USB HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service.sony
+    android.hardware.usb-service.sony \
+    android.hardware.usb.gadget-service.sony
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -534,9 +535,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
-# USB
+# Vendor libstdc++
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service-qti
+    libstdc++.vendor
 
 # Vendor service manager
 PRODUCT_PACKAGES += \
