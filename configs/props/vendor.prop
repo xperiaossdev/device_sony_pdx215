@@ -154,6 +154,7 @@ ro.bluetooth.a2dp_offload.supported=true
 ro.vendor.bt.bdaddr_path=/data/vendor/etc/bluetooth_bdaddr
 persist.vendor.bt.a2dp.hal.implementation=true
 persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
 
 # Camera
 vendor.camera.enable.uvc=true
