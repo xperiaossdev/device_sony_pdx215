@@ -104,3 +104,8 @@
 /sys/devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8350c@2:qcom,flash_led@ee00/leds/led:switch_0/brightness u:object_r:sysfs_torch_brightness:s0
 /sys/class/leds/led:torch_0(/.*)? u:object_r:sysfs_graphics:s0
 /sys/class/leds/led:torch_3(/.*)? u:object_r:sysfs_graphics:s0
+# USB Gadget script
+/(vendor|system/vendor)/bin/init\.gadgethal\.sh                                         u:object_r:init_gadgethal_exec:s0
+
+# USB
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb@1\.2-service\.sony                u:object_r:hal_usb_impl_exec:s0

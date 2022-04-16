@@ -250,6 +250,7 @@ PRODUCT_PACKAGES += \
 # Common init scripts
 PRODUCT_PACKAGES += \
     init.class_main.sh \
+    init.gadgethal.sh \
     init.qcom.early_boot.sh \
     init.qcom.msim.sh \
     init.qcom.rc \
@@ -257,6 +258,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.recovery.qcom.rc \
+    init.qcom.usb.rc \
     init.target.rc \
     ueventd.qcom.rc \
     fstab.default \
@@ -445,6 +447,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     extphonelib \
     extphonelib.xml
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.2-service.sony
 
 # Sensors
 PRODUCT_PACKAGES += \
