@@ -3,12 +3,10 @@ audio.offload.min.duration.secs=30
 persist.vendor.audio.hac.enable=false
 persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 
-<<<<<<< HEAD
-=======
 # Bluetooth
 bluetooth.device.class_of_device=90,2,12
 bluetooth.profile.a2dp.source.enabled=true
-bluetooth.profile.asha.central.enabled=false
+bluetooth.profile.asha.central.enabled=true
 bluetooth.profile.avrcp.target.enabled=true
 bluetooth.profile.bas.client.enabled=true
 bluetooth.profile.gatt.enabled=true
@@ -23,7 +21,6 @@ bluetooth.profile.pbap.server.enabled=true
 bluetooth.profile.sap.server.enabled=true
 bluetooth.profile.vcp.controller.enabled=true
 
->>>>>>> ca9e083 (sm8250-common: Align ASHA prop with BluetoothProperties)
 # Camera
 camera.disable_zsl_mode=true
 
