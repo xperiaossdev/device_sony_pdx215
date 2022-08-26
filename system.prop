@@ -38,6 +38,7 @@ persist.vendor.cne.feature=1
 
 # DPM
 persist.vendor.dpm.feature=11
+debug.sf.enable_transaction_tracing=false
 
 # IMS
 persist.dbg.volte_avail_ovr=1
