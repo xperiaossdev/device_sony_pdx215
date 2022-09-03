@@ -229,6 +229,9 @@ ro.camera.notify_nfc=1
 vendor.power.pasr.enabled=true
 vendor.pasr.activemode.enabled=true
 
+# Multi-gen LRU
+persist.device_config.mglru_native.lru_gen_config=all
+
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
 
