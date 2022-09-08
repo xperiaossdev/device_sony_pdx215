@@ -414,7 +414,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti \
+    android.hardware.power-service.lahaina-libperfmgr \
     android.hardware.power@1.2.vendor \
     vendor.qti.hardware.perf@2.2.vendor
 
@@ -450,6 +450,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/sony \
+    hardware/google/interfaces \
+    hardware/google/pixel \
     vendor/qcom/opensource/usb/etc
 
 # Sony charger interface
