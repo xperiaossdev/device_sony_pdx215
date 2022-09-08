@@ -68,6 +68,9 @@
 /sys/devices/dsi_panel_driver(/.*)?                             u:object_r:sysfs_dp:s0
 /sys/devices(/platform)?/soc/[0-9a-f]+.qcom,spmi/spmi-[0-9]+/spmi[0-9]+-[0-9]+/[0-9a-f]+.qcom,spmi:qcom,[0-9a-z]+@[0-9]+:qcom,leds@[a-f0-9]+(/.*)? u:object_r:vendor_sysfs_graphics:s0
 
+# Power
+/vendor/bin/hw/android\.hardware\.power-service\.lahaina-libperfmgr          u:object_r:hal_power_default_exec:s0
+
 # Inputs
 /sys/devices/virtual/input/input[0-9]+/als_Itime          u:object_r:sysfs_camera:s0
 /sys/devices/virtual/input/input[0-9]+/als_all            u:object_r:sysfs_camera:s0
