@@ -30,3 +30,5 @@ allow init vendor_hal_soter_qti:process { transition siginh rlimitinh };
 allow init sysfs:file setattr;
 allow init vendor_sysfs_graphics:lnk_file read;
 
+# Allow init to set read_ahead_kb on /data partition
+allow init vendor_sysfs_scsi_host:file w_file_perms;

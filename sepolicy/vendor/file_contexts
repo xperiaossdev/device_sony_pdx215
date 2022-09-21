@@ -110,3 +110,6 @@
 # USB
 /(vendor|system/vendor)/bin/hw/android\.hardware\.usb-service\.sony                     u:object_r:hal_usb_impl_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.usb\.gadget-service\.sony             u:object_r:hal_usb_gadget_impl_exec:s0
+
+# Label read_ahead_kb in /data partition
+/sys/devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:0/block/sda/queue/read_ahead_kb u:object_r:vendor_sysfs_scsi_host:s0
