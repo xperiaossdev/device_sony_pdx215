@@ -9,6 +9,9 @@ service msim_sh /odm/bin/init.qcom.msim.sh
     group root
     oneshot
 
+on init
+    copy_per_line /dev/cpuctl/tasks /dev/cpuctl/system/tasks
+
 on post-fs
     # radio
     exec_start msim_sh
@@ -27,6 +30,9 @@ on property:ro.vendor.ltalabel.model=XQ-BC52
 on property:ro.vendor.ltalabel.model=XQ-BC42
     setprop ro.vendor.product.rf.id PDX215-J2
     setprop persist.vendor.nfc.config_file_name "libnfc-nxp-typef.conf"
+
+    # Migrate tasks again in case kernel threads are created during boot
+    copy_per_line /dev/cpuctl/tasks /dev/cpuctl/system/tasks
 
 # USB config, refer to init.sony.usb.rc
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
