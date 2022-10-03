@@ -264,7 +264,7 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/ril/apns-conf.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/apns-conf.xml
 
 # Security Patch Level
-VENDOR_SECURITY_PATCH := 2023-04-01
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # SEPolicy
 include device/qcom/sepolicy_vndr-legacy-um/SEPolicy.mk
