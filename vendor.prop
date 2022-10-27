@@ -184,6 +184,9 @@ vendor.display.enable_async_powermode=0
 vendor.display.disable_hw_recovery_dump=1
 vendor.display.enable_hdr10_gpu_target=1
 
+# SurfaceFlinger
+debug.sf.disable_client_composition_cache=1
+
 # DRM
 drm.service.enabled=true
 
