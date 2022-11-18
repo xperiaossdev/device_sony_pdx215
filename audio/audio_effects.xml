@@ -75,6 +75,22 @@
         <effect name="equalizer3" library="bundle3" uuid="d88dd21e-d000-4633-8249-4892935db492" />
         <effect name="equalizer4" library="bundle4" uuid="5e2452ed-c19e-4b13-92be-fef7a4b7d49f" />
     </effects>
+    <libraries>
+        <!--DOLBY DAP-->
+        <library name="dap_sw" path="libswdap.so"/>
+        <library name="dap_hw" path="libhwdap.so"/>
+        <!--DOLBY VQE-->
+        <library name="vqe" path="libswvqe.so"/>
+    </libraries>
+    <effects>
+        <!--DOLBY DAP-->
+        <effectProxy name="dap" library="proxy" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa">
+            <libsw library="dap_sw" uuid="6ab06da4-c516-4611-8166-452799218539"/>
+            <libhw library="dap_hw" uuid="a0c30891-8246-4aef-b8ad-d53e26da0253"/>
+        </effectProxy>
+        <!--DOLBY VQE-->
+        <effect name="vqe" library="vqe" uuid="64a0f614-7fa4-48b8-b081-d59dc954616f"/>
+    </effects>
     <postprocess>
         <stream type="music">
             <apply effect="music_helper" />
