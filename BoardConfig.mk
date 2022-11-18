@@ -81,6 +81,7 @@ BOARD_KERNEL_CMDLINE := \
     loop.max_part=7 \
     cgroup.memory=nokmem,nosocket \
     pcie_ports=compat \
+    kpti=off \
     loop.max_part=7 \
     iptable_raw.raw_before_defrag=1 \
     ip6table_raw.raw_before_defrag=1 \
