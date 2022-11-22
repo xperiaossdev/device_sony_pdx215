@@ -186,6 +186,8 @@ vendor.display.enable_hdr10_gpu_target=1
 
 # SurfaceFlinger
 debug.sf.disable_client_composition_cache=1
+debug.sf.high_fps_late_app_phase_offset_ns=1000000
+debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 
 # DRM
 drm.service.enabled=true
@@ -200,8 +202,6 @@ vendor.gatekeeper.disable_spu=true
 debug.sf.disable_client_composition_cache=1
 debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
-debug.sf.high_fps_late_app_phase_offset_ns=1000000
-debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 ro.surface_flinger.set_idle_timer_ms=4000
 ro.surface_flinger.set_touch_timer_ms=4000
 debug.sf.latch_unsignaled=0
