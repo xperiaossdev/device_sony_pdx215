@@ -91,6 +91,8 @@
         <Setting name="max-video-encoder-input-buffers" value="11" />
     </Settings>
     <Decoders>
+    <!-- Include Dolby Audio MediaCodecs (AC3, EAC3, EAC3-JOC, AC4) -->
+    <Include href="media_codecs_dolby_audio.xml" />
         <!-- C2 decoders -->
         <MediaCodec name="c2.qti.avc.decoder" type="video/avc">
             <Alias name="OMX.qcom.video.decoder.avc"/>
