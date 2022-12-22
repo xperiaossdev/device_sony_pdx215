@@ -1,2 +1,2 @@
-# device_sony_pdx21X
+# device_sony_sagami
 XOSD SAGAMI Configurations based on Stock for Xperias
