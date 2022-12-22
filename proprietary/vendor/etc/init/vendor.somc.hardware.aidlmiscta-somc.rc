@@ -1,0 +1,5 @@
+service vendor.aidlmiscta-somc /vendor/bin/hw/vendor.somc.hardware.aidlmiscta-service.somc
+    class hal
+    user system
+    group system
+    shutdown critical

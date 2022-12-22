@@ -1,0 +1,21 @@
+{
+    "QModKey_Static_VppFilter": {
+        "descriptor": "Holds the static presets specific to VPP",
+        "presets": [
+            {
+                "id": "aie",
+                "configs": {
+                    "vendor.qti-ext-vpp.mode": "HQV_MODE_MANUAL",
+                    "vendor.qti-ext-vpp-aie.mode": "HQV_MODE_AUTO",
+                    "vendor.qti-ext-vpp-aie.cade-level": "0"
+                }
+            }
+        ]
+    },
+
+    "QModKey_Dynamic_VppFilter": {
+        "descriptor": "Holds the dynamic presets specific to VPP",
+        "presets": [
+        ]
+    }
+}

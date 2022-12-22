@@ -1,0 +1,11 @@
+on early-boot
+    mkdir /data/vendor/misc/nvconfig 0771 root system
+
+on property:init.svc.vendor.diag-router=running
+    start nv_updater
+
+service nv_updater /vendor/bin/nv_updater -c 0
+    oneshot
+    user root
+    group system oem_2997 oem_2993 vendor_qti_diag
+    seclabel u:r:nv_updater:s0
