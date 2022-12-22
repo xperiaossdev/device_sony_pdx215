@@ -1,10 +1,10 @@
 [
   {
-    "repository": "android_hardware_sony",
+    "repository": "hardware_sony",
     "target_path": "hardware/sony"
   },
   {
-    "repository": "android_kernel_sony_sagami",
+    "repository": "kernel_sony_sagami",
     "target_path": "kernel/sony/sagami"
   }
 ]
