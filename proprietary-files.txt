@@ -1,4 +1,4 @@
-# Stock package version: Sony/qssi/qssi:13/TKQ1.220807.001/1:user/release-keys
+# Stock package version: XQ-BC52 Orange MCV FR/ES/PL/SK/RO SEA_61.2.A.0.388
 
 # ACDB
 vendor/etc/acdbdata/adsp_avs_config.acdb
