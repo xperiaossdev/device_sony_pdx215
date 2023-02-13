@@ -30,7 +30,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 $(call inherit-product, device/sony/sagami/sagami-vendor.mk)
 
 # VNDK
-PRODUCT_SHIPPING_API_LEVEL := 32
+PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Additional native libraries
 PRODUCT_COPY_FILES += \
