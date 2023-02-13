@@ -21,7 +21,7 @@
     <hal format="hidl">
         <name>android.hardware.bluetooth.audio</name>
         <transport>hwbinder</transport>
-        <version>2.0</version>
+        <version>2.1</version>
         <interface>
             <name>IBluetoothAudioProvidersFactory</name>
             <instance>default</instance>
@@ -311,8 +311,8 @@
     <hal format="hidl">
       <name>vendor.semc.system.idd</name>
       <transport>hwbinder</transport>
-      <fqname>@1.0::IIdd/default</fqname>
-      <fqname>@1.0::IIdd/logreader</fqname>
+      <fqname>@1.1::IIdd/default</fqname>
+      <fqname>@1.1::IIdd/logreader</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.perf</name>
@@ -463,5 +463,14 @@
     <hal format="aidl">
         <name>vendor.somc.hardware.aidlmiscta</name>
         <fqname>IMisctaGlobal/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.cacert</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IService</name>
+            <instance>default</instance>
+        </interface>
     </hal>
 </manifest>

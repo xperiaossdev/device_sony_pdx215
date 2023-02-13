@@ -62,6 +62,9 @@ static constexpr uint32_t WAVEFORM_SLOW_RISE_INDEX = 7;
 static constexpr uint32_t WAVEFORM_QUICK_FALL_INDEX = 8;
 static constexpr uint32_t WAVEFORM_LIGHT_TICK_INDEX = 9;
 static constexpr uint32_t WAVEFORM_LOW_TICK_INDEX = 10;
+static constexpr uint32_t WAVEFORM_CUSTOM_TICK_INDEX_1 = 11;
+static constexpr uint32_t WAVEFORM_CUSTOM_TICK_INDEX_2 = 12;
+static constexpr uint32_t WAVEFORM_CUSTOM_TICK_INDEX_3 = 13;
 
 static constexpr uint32_t WAVEFORM_UNSAVED_TRIGGER_QUEUE_INDEX = 65529;
 static constexpr uint32_t WAVEFORM_TRIGGER_QUEUE_INDEX = 65534;
@@ -112,7 +115,7 @@ static constexpr float PWLE_FREQUENCY_MAX_HZ = 999.0f;
 static constexpr float PWLE_BW_MAP_SIZE =
     1 + ((PWLE_FREQUENCY_MAX_HZ - PWLE_FREQUENCY_MIN_HZ) / PWLE_FREQUENCY_RESOLUTION_HZ);
 static constexpr float RAMP_DOWN_CONSTANT = 1048.576f;
-static constexpr float RAMP_DOWN_TIME_MS = 50.0f;
+static constexpr float RAMP_DOWN_TIME_MS = 0.0f;
 
 static struct pcm_config haptic_nohost_config = {
     .channels = 1,
@@ -509,10 +512,7 @@ ndk::ScopedAStatus Vibrator::on(uint32_t timeoutMs, uint32_t effectIndex,
 }
 
 ndk::ScopedAStatus Vibrator::setEffectAmplitude(float amplitude, float maximum) {
-    ALOGE("BBN: got amplitude: %lf, maximum: %lf", amplitude, maximum);
     int32_t scale = amplitudeToScale(amplitude, maximum);
-
-    ALOGE("BBN: Scale: %d", scale);
 
     if (!mHwApi->setEffectScale(scale)) {
         ALOGE("Failed to set effect amplitude (%d): %s", errno, strerror(errno));
@@ -974,21 +974,21 @@ ndk::ScopedAStatus Vibrator::getSimpleDetails(Effect effect, EffectStrength stre
     }
 
     switch (effect) {
-        case Effect::TEXTURE_TICK:
-            effectIndex = WAVEFORM_LIGHT_TICK_INDEX;
-            intensity *= 1.0f;
+        case Effect::TEXTURE_TICK:  // 21
+        case Effect::TICK:          // 2
+            effectIndex = WAVEFORM_LOW_TICK_INDEX;  // 10
             break;
-        case Effect::TICK:
-            effectIndex = WAVEFORM_CLICK_INDEX;
-            intensity *= 1.0f;
+        case Effect::CLICK:         // 0
+            effectIndex = WAVEFORM_CLICK_INDEX;     // 2
             break;
-        case Effect::CLICK:
-            effectIndex = WAVEFORM_CLICK_INDEX;
-            intensity *= 1.0f;
+        case Effect::THUD:          // 3
+            effectIndex = WAVEFORM_CUSTOM_TICK_INDEX_1; // 11
             break;
-        case Effect::HEAVY_CLICK:
-            effectIndex = WAVEFORM_CLICK_INDEX;
-            intensity *= 1.0f;
+        case Effect::POP:           // 4
+            effectIndex = WAVEFORM_CUSTOM_TICK_INDEX_2; // 12
+            break;
+        case Effect::HEAVY_CLICK:   // 5
+            effectIndex = WAVEFORM_CUSTOM_TICK_INDEX_3; // 13
             break;
         default:
             return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
@@ -1119,6 +1119,10 @@ ndk::ScopedAStatus Vibrator::performEffect(Effect effect, EffectStrength strengt
         case Effect::CLICK:
             // fall-through
         case Effect::HEAVY_CLICK:
+            // fall-through
+        case Effect::THUD:
+            // fall-through
+        case Effect::POP:
             status = getSimpleDetails(effect, strength, &effectIndex, &timeMs, &volLevel);
             break;
         case Effect::DOUBLE_CLICK:
@@ -1131,8 +1135,6 @@ ndk::ScopedAStatus Vibrator::performEffect(Effect effect, EffectStrength strengt
     if (!status.isOk()) {
         goto exit;
     }
-
-    ALOGE("BBN: VolLevel: %d", volLevel);
 
     status = performEffect(effectIndex, volLevel, &effectQueue, callback);
 
@@ -1197,8 +1199,6 @@ uint32_t Vibrator::intensityToVolLevel(float intensity, uint32_t effectIndex) {
             volLevel = calc(intensity, mClickEffectVol);
             break;
     }
-
-    ALOGE("BBN: Intensity: %lf, effectIndex: %d, vol: %lf", intensity, effectIndex, volLevel);
 
     return volLevel;
 }
@@ -1283,12 +1283,18 @@ void Vibrator::setPwleRampDown() {
     // where Trd is the desired ramp down time in seconds
     // pwle_ramp_down accepts only 24 bit integers values
 
-    const float seconds = RAMP_DOWN_TIME_MS / 1000;
-    const auto ramp_down_coefficient = static_cast<uint32_t>(RAMP_DOWN_CONSTANT / seconds);
-
-    if (!mHwApi->setPwleRampDown(ramp_down_coefficient)) {
-        ALOGE("Failed to write \"%d\" to pwle_ramp_down (%d): %s", ramp_down_coefficient, errno,
-              strerror(errno));
+    if (RAMP_DOWN_TIME_MS != 0.0) {
+        const float seconds = RAMP_DOWN_TIME_MS / 1000;
+        const auto ramp_down_coefficient = static_cast<uint32_t>(RAMP_DOWN_CONSTANT / seconds);
+        if (!mHwApi->setPwleRampDown(ramp_down_coefficient)) {
+            ALOGE("Failed to write \"%d\" to pwle_ramp_down (%d): %s", ramp_down_coefficient, errno,
+                  strerror(errno));
+        }
+    } else {
+        // Turn off the low level PWLE Ramp Down feature
+        if (!mHwApi->setPwleRampDown(0)) {
+            ALOGE("Failed to write 0 to pwle_ramp_down (%d): %s", errno, strerror(errno));
+        }
     }
 }
 

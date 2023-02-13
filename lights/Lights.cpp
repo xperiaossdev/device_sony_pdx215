@@ -15,161 +15,103 @@
  */
 
 #include "Lights.h"
-
-#include <android-base/file.h>
+#include <log/log.h>
 #include <android-base/logging.h>
-#include <fcntl.h>
-
-using ::android::base::WriteStringToFile;
 
 namespace aidl {
 namespace android {
 namespace hardware {
 namespace light {
 
-#define LED_PATH(led)                       "/sys/class/leds/" led "/"
-
-static const std::string led_paths[] {
-    [RED] = LED_PATH("red"),
-    [GREEN] = LED_PATH("green"),
-    [BLUE] = LED_PATH("blue"),
-    [WHITE] = LED_PATH("white"),
+const static std::map<LightType, const char*> kLogicalLights = {
+    {LightType::BACKLIGHT,     LIGHT_ID_BACKLIGHT},
+    {LightType::KEYBOARD,      LIGHT_ID_KEYBOARD},
+    {LightType::BUTTONS,       LIGHT_ID_BUTTONS},
+    {LightType::BATTERY,       LIGHT_ID_BATTERY},
+    {LightType::NOTIFICATIONS, LIGHT_ID_NOTIFICATIONS},
+    {LightType::ATTENTION,     LIGHT_ID_ATTENTION},
+    {LightType::BLUETOOTH,     LIGHT_ID_BLUETOOTH},
+    {LightType::WIFI,          LIGHT_ID_WIFI}
 };
 
-static const std::string kLCDFile = "/sys/class/backlight/panel0-backlight/brightness";
-
-#define AutoHwLight(light) {.id = (int)light, .type = light, .ordinal = 0}
-
-// List of supported lights
-const static std::vector<HwLight> kAvailableLights = {
-    AutoHwLight(LightType::BATTERY),
-    AutoHwLight(LightType::NOTIFICATIONS)
-};
-
-Lights::Lights() {
-    mWhiteLed = !access((led_paths[WHITE] + "brightness").c_str(), W_OK);
+light_device_t* getLightDevice(const char* name) {
+    light_device_t* lightDevice;
+    const hw_module_t* hwModule = NULL;
+    int ret = hw_get_module (LIGHTS_HARDWARE_MODULE_ID, &hwModule);
+    if (ret == 0) {
+        ret = hwModule->methods->open(hwModule, name,
+            reinterpret_cast<hw_device_t**>(&lightDevice));
+        if (ret != 0) {
+            ALOGE("light_open %s %s failed: %d", LIGHTS_HARDWARE_MODULE_ID, name, ret);
+        }
+    } else {
+        ALOGE("hw_get_module %s %s failed: %d", LIGHTS_HARDWARE_MODULE_ID, name, ret);
+    }
+    if (ret == 0) {
+        return lightDevice;
+    } else {
+        ALOGE("Light passthrough failed to load legacy HAL.");
+        return nullptr;
+    }
 }
 
-// AIDL methods
-ndk::ScopedAStatus Lights::setLightState(int id, const HwLightState& state) {
-    switch (id) {
-        case (int)LightType::BATTERY:
-            mBattery = state;
-            handleSpeakerBatteryLocked();
-            break;
-        case (int)LightType::NOTIFICATIONS:
-            mNotification = state;
-            handleSpeakerBatteryLocked();
-            break;
-        default:
-            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
-            break;
+Lights::Lights() {
+    std::map<int, light_device_t*> lights;
+    std::vector<HwLight> availableLights;
+    int lightCount =0;
+    for(auto const &pair : kLogicalLights) {
+        LightType type = pair.first;
+        const char* name = pair.second;
+        light_device_t* lightDevice = getLightDevice(name);
+        lightCount++;
+        if (lightDevice != nullptr) {
+            HwLight hwLight{};
+            hwLight.id = (int)type;
+            hwLight.type = type;
+            hwLight.ordinal = 0;
+            lights[hwLight.id] = lightDevice;
+            availableLights.emplace_back(hwLight);
+        }
     }
+    mAvailableLights = availableLights;
+    mLights = lights;
+    maxLights = lightCount;
+}
 
-    return ndk::ScopedAStatus::ok();
+ndk::ScopedAStatus Lights::setLightState(int id, const HwLightState& state) {
+    if (id >= maxLights) {
+        ALOGE("Invalid Light id : %d", id);
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+    }
+    auto it = mLights.find(id);
+    if (it == mLights.end()) {
+        ALOGE("Light not supported");
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+    }
+    light_device_t* hwLight = it->second;
+    light_state_t legacyState {
+        .color = static_cast<unsigned int>(state.color),
+        .flashMode = static_cast<int>(state.flashMode),
+        .flashOnMS = state.flashOnMs,
+        .flashOffMS = state.flashOffMs,
+        .brightnessMode = static_cast<int>(state.brightnessMode),
+    };
+    int ret = hwLight->set_light(hwLight, &legacyState);
+    switch (ret) {
+        case -ENOSYS:
+            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        case 0:
+            return ndk::ScopedAStatus::ok();
+        default:
+            return ndk::ScopedAStatus::fromServiceSpecificError(ret);
+    }
 }
 
 ndk::ScopedAStatus Lights::getLights(std::vector<HwLight>* lights) {
-    for (auto i = kAvailableLights.begin(); i != kAvailableLights.end(); i++) {
+    for (auto i = mAvailableLights.begin(); i != mAvailableLights.end(); i++) {
         lights->push_back(*i);
     }
     return ndk::ScopedAStatus::ok();
-}
-
-// device methods
-void Lights::setSpeakerLightLocked(const HwLightState& state) {
-    uint32_t alpha, red, green, blue;
-    uint32_t blink;
-    bool rc = true;
-
-    // Extract brightness from AARRGGBB
-    alpha = (state.color >> 24) & 0xFF;
-    red = (state.color >> 16) & 0xFF;
-    green = (state.color >> 8) & 0xFF;
-    blue = state.color & 0xFF;
-
-    // Scale RGB brightness if Alpha brightness is not 0xFF
-    if (alpha != 0xFF) {
-        red = (red * alpha) / 0xFF;
-        green = (green * alpha) / 0xFF;
-        blue = (blue * alpha) / 0xFF;
-    }
-
-    blink = (state.flashOnMs != 0 && state.flashOffMs != 0);
-
-    switch (state.flashMode) {
-        case FlashMode::HARDWARE:
-        case FlashMode::TIMED:
-            if (mWhiteLed) {
-                rc = setLedBreath(WHITE, blink);
-            } else {
-                if (!!red)
-                    rc = setLedBreath(RED, blink);
-                if (!!green)
-                    rc &= setLedBreath(GREEN, blink);
-                if (!!blue)
-                    rc &= setLedBreath(BLUE, blink);
-            }
-            if (rc)
-                break;
-            FALLTHROUGH_INTENDED;
-        case FlashMode::NONE:
-        default:
-            if (mWhiteLed) {
-                rc = setLedBrightness(WHITE, RgbaToBrightness(state.color));
-            } else {
-                rc = setLedBrightness(RED, red);
-                rc &= setLedBrightness(GREEN, green);
-                rc &= setLedBrightness(BLUE, blue);
-            }
-            break;
-    }
-
-    return;
-}
-
-void Lights::handleSpeakerBatteryLocked() {
-    if (IsLit(mBattery.color))
-        return setSpeakerLightLocked(mBattery);
-    else
-        return setSpeakerLightLocked(mNotification);
-}
-
-bool Lights::setLedBreath(led_type led, uint32_t value) {
-    return WriteToFile(led_paths[led] + "breath", value);
-}
-
-bool Lights::setLedBrightness(led_type led, uint32_t value) {
-    return WriteToFile(led_paths[led] + "brightness", value);
-}
-
-// Utils
-bool Lights::IsLit(uint32_t color) {
-    return color & 0x00ffffff;
-}
-
-uint32_t Lights::RgbaToBrightness(uint32_t color) {
-    // Extract brightness from AARRGGBB.
-    uint32_t alpha = (color >> 24) & 0xFF;
-
-    // Retrieve each of the RGB colors
-    uint32_t red = (color >> 16) & 0xFF;
-    uint32_t green = (color >> 8) & 0xFF;
-    uint32_t blue = color & 0xFF;
-
-    // Scale RGB colors if a brightness has been applied by the user
-    if (alpha != 0xFF) {
-        red = red * alpha / 0xFF;
-        green = green * alpha / 0xFF;
-        blue = blue * alpha / 0xFF;
-    }
-
-    return (77 * red + 150 * green + 29 * blue) >> 8;
-}
-
-// Write value to path and close file.
-bool Lights::WriteToFile(const std::string& path, uint32_t content) {
-    return WriteStringToFile(std::to_string(content), path);
 }
 
 }  // namespace light
