@@ -27,7 +27,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Include common vendor stuff
-$(call inherit-product, vendor/sony/sagami/sagami-vendor.mk)
+$(call inherit-product, vendor/sony/sagami/common/common-vendor.mk)
 
 # VNDK
 PRODUCT_SHIPPING_API_LEVEL := 30
