@@ -1652,7 +1652,6 @@ static int amp_module_open(const hw_module_t *module, const char *name,
   cs35l41_dev->amp_dev.in_set_parameters = NULL;
   cs35l41_dev->amp_dev.out_set_parameters = NULL;
   cs35l41_dev->amp_dev.set_feedback = NULL;
-  cs35l41_dev->amp_dev.calibrate = amp_calib;
 
   *device = (hw_device_t *)cs35l41_dev;
 
