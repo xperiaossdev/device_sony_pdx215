@@ -393,12 +393,17 @@ PRODUCT_PACKAGES += \
     android.hardware.neuralnetworks@1.3.vendor
 
 # NFC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
+    $(LOCAL_PATH)/nfc/libnfc-nxp_RF.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp_RF.conf \
+    $(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf
+
 PRODUCT_PACKAGES += \
     android.hardware.nfc_snxxx@1.2-service \
     android.hardware.secure_element@1.2.vendor \
     com.android.nfc_extras \
-    Tag \
-    NfcNci
+    NfcNci \
+    Tag
 
 # OMX
 PRODUCT_PACKAGES += \
