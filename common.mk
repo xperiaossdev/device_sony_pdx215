@@ -270,10 +270,6 @@ PRODUCT_PACKAGES += \
     vendor_modprobe.sh \
     init.sony.rc
 
-# Configstore
-PRODUCT_PACKAGES += \
-    disable_configstore
-
 # Display
 PRODUCT_PACKAGES += \
     libdisplayconfig.qti \
