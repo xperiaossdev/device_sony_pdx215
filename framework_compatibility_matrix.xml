@@ -79,17 +79,25 @@
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.semc.hardware.charger</name>
+        <version>1.1</version>
+        <interface>
+          <name>ICharger</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.semc.hardware.charger</name>
         <version>1.0</version>
         <interface>
             <name>ICharger</name>
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.semc.hardware.charger</name>
-        <version>1.1</version>
+<hal format="aidl" optional="true">
+        <name>vendor.sony.charger</name>
+        <version>1</version>
         <interface>
-          <name>ICharger</name>
+            <name>ICharger</name>
             <instance>default</instance>
         </interface>
     </hal>
