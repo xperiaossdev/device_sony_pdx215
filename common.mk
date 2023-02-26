@@ -456,6 +456,8 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Sony charger interface
 PRODUCT_PACKAGES += \
+    vendor.sony.charger \
+    vendor.sony.charger-service \
     vendor.semc.hardware.charger@1.0.vendor \
     vendor.semc.hardware.charger@1.1.vendor
 
