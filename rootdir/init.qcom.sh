@@ -459,7 +459,7 @@ setprop ro.vendor.ril.mbn_copy_completed 1
 #current default minimum boot-time-default
 buildvariant=`getprop ro.build.type`
 case "$buildvariant" in
-    "userdebug" | "eng")
+    "eng")
         #set default loglevel to KERN_INFO
         echo "7 6 1 7" > /proc/sys/kernel/printk
         ;;
