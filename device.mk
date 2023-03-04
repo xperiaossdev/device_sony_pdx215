@@ -265,6 +265,7 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc \
     fstab.default \
     fstab.default.vendor_ramdisk \
+    init.lahaina.post_boot.sh \
     init.sony-device-common.rc \
     init.sony-platform.rc \
     init.sony.rc
