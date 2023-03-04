@@ -523,10 +523,6 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.3-service-qti
 
-# Vendor libstdc++
-PRODUCT_PACKAGES += \
-    libstdc++.vendor
-
 # Vendor service manager
 PRODUCT_PACKAGES += \
     vndservicemanager
