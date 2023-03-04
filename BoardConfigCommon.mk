@@ -239,9 +239,6 @@ ENABLE_VENDOR_RIL_SERVICE := true
 # Security patch level
 VENDOR_SECURITY_PATCH := 2022-03-01
 
-# Telephony
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-
 # Sepolicy
 include device/qcom/sepolicy_vndr-legacy-um/SEPolicy.mk
 include hardware/sony/sepolicy/qti/SEPolicy.mk
