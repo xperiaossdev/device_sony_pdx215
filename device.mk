@@ -414,11 +414,19 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libstagefrighthw
 
+# Perf
+PRODUCT_PACKAGES += \
+    libpsi.vendor \
+    libtflite
+
+PRODUCT_BOOT_JARS += \
+    QPerformance \
+    UxPerformance
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
-    android.hardware.power@1.2.vendor \
-    vendor.qti.hardware.perf@2.2.vendor
+    android.hardware.power@1.2.vendor
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -514,7 +522,9 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.qti
+    android.hardware.thermal@2.0-service.mock \
+    android.hardware.thermal@2.0 \
+    android.hardware.thermal@2.0.vendor
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/power/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
