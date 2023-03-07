@@ -31,6 +31,9 @@ echo 1-2 > /dev/cpuset/audio-app/cpus
 echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo "schedutil" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
 echo "schedutil" > /sys/devices/system/cpu/cpu7/cpufreq/scaling_governor
+echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us
+echo 10000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us
+echo 5000 > /sys/devices/system/cpu/cpu7/cpufreq/schedutil/down_rate_limit_us
 
 # uclamp tuning
 echo 50 > /dev/cpuctl/background/cpu.uclamp.max
