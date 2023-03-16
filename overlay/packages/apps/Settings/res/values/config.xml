@@ -5,14 +5,14 @@
 -->
 <resources>
 
-    <!-- Whether to show Smooth Display feature in Settings Options -->
-    <bool name="config_show_smooth_display">true</bool>
-
     <!-- Battery Health -->
     <bool name="config_supportBatteryHealth">true</bool>
     <string name="config_batteryCalculatedCapacity">/sys/class/power_supply/battery/charge_counter</string>
     <string name="config_batteryDesignCapacity">/sys/class/power_supply/battery/charge_full_design</string>
     <string name="config_batteryChargeCycles">/sys/class/power_supply/battery/cycle_count</string>
+
+    <!-- Whether to show Smooth Display feature in Settings Options -->
+    <bool name="config_show_smooth_display">true</bool>
 
     <!-- The number of vibration intensity levels supported by the device.
 
