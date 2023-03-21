@@ -42,6 +42,9 @@
      <!-- Indicate the device support request channel on Wi-Fi Aware data-path. -->
      <bool translatable="false" name="config_wifiSupportChannelOnDataPath">true</bool>
 
+    <!-- Enable WPA2 to WPA3 auto-upgrade -->
+    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">true</bool>
+
     <!-- Boolean indicating whether the wifi chipset supports background scanning mechanism.
          This mechanism allows the host to remain in suspend state and the dongle to actively
          scan and wake the host when a configured SSID is detected by the dongle. This chipset
