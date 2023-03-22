@@ -39,8 +39,7 @@ AB_OTA_PARTITIONS += \
     vendor_dlkm \
     vendor_boot
 
-# APEX image
-DEXPREOPT_GENERATE_APEX_IMAGE := true
+# APEX
 OVERRIDE_TARGET_FLATTEN_APEX := true
 
 # Architecture
