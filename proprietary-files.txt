@@ -1,4 +1,4 @@
-# Stock package version: XQ-BC52 Orange MCV FR/ES/PL/SK/RO SEA_61.2.A.0.388
+# Stock package version: XQ-BC52_Customized UK_61.2.A.0.410
 
 # ACDB
 vendor/etc/acdbdata/CDP/CDP_Bluetooth_cal.acdb
