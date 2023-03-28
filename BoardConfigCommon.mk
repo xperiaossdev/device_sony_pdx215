@@ -69,6 +69,7 @@ BOARD_KERNEL_CMDLINE := \
     androidboot.console=ttyMSM0 \
     androidboot.memcg=1 \
     lpm_levels.sleep_disabled=1 \
+    android_kmalloc_64_create=true \
     msm_rtb.filter=0x237 \
     service_locator.enable=1 \
     androidboot.usbcontroller=a600000.dwc3 \
