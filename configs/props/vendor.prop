@@ -100,7 +100,7 @@ vendor.audio.feature.snd_mon.enable=true
 vendor.audio.enable.cirrus.speaker=true
 vendor.voice.path.for.pcm.voip=true
 
-### ART
+# ART
 dalvik.vm.dex2oat64.enabled=true
 ro.sys.fw.dex2oat_thread_count=8
 dalvik.vm.boot-dex2oat-threads=8
@@ -173,6 +173,7 @@ ro.surface_flinger.wcg_composition_dataspace=143261696
 ro.surface_flinger.protected_contents=true
 ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
+ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 ro.surface_flinger.max_virtual_display_dimension=4096
 vendor.display.disable_excl_rect=0
 vendor.display.disable_excl_rect_partial_fb=1
@@ -184,7 +185,8 @@ vendor.display.disable_hw_recovery_dump=1
 vendor.display.enable_hdr10_gpu_target=1
 
 # SurfaceFlinger
-debug.sf.disable_client_composition_cache=1
+debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
+debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 
@@ -199,10 +201,10 @@ vendor.gatekeeper.disable_spu=true
 
 # Graphics
 debug.sf.disable_client_composition_cache=1
-debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
-debug.sf.high_fps_early_phase_offset_ns=-4000000
+debug.sf.enable_gl_backpressure=1
 ro.surface_flinger.set_idle_timer_ms=4000
 ro.surface_flinger.set_touch_timer_ms=4000
+debug.sf.latch_unsignaled=1
 persist.demo.hdmirotationlock=false
 persist.vendor.colorgamut.current.mode=1
 persist.sys.sf.color_saturation=1.0
@@ -244,7 +246,7 @@ persist.vendor.radio.procedure_bytes=SKIP
 persist.vendor.radio.rat_on=combine
 persist.vendor.radio.oem_socket=true
 persist.vendor.radio.enableadvancedscan=true
-vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 ril.subscription.types=NV,RUIM
 ro.com.android.dataroaming=true
 
@@ -271,4 +273,3 @@ wifi.aware.interface=wifi-aware0
 
 # Zygote
 zygote.critical_window.minute=10
-
