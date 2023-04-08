@@ -14,7 +14,7 @@ if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
 ANDROID_ROOT="${MY_DIR}/../../.."
 
-HELPER="${ANDROID_ROOT}/tools/extract-utils/extract_utils.sh"
+HELPER="${ANDROID_ROOT}/vendor/lineage/build/tools/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
@@ -60,7 +60,22 @@ fi
 
 function blob_fixup() {
     case "${1}" in
-    vendor/lib64/vendor.somc.camera* | vendor/bin/hw/vendor.somc.hardware.camera.*)
+    system_ext/lib64/libwfdnative.so | vendor/lib64/libvpplibrary.so | vendor/lib64/libswiqisettinghelper.so | /vendor/lib64/vendor.somc.hardware.swiqi@1.0-impl.so)
+        sed -i "s/android.hidl.base@1.0.so/libhidlbase.so\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00/" "${2}"
+        ;;
+    product/lib64/libdpmframework.so)
+        sed -i "s/libhidltransport.so/libcutils-v29.so\x00\x00\x00/" "${2}"
+        ;;
+    vendor/lib64/libcammw.so)
+        "${PATCHELF}" --replace-needed "android.hardware.light-V1-ndk_platform.so" "android.hardware.light-V1-ndk.so" "${2}"
+        ;;
+    vendor/lib64/vendor.semc.hardware.extlight-V1-ndk_platform.so)
+        "${PATCHELF}" --replace-needed "android.hardware.light-V1-ndk_platform.so" "android.hardware.light-V1-ndk.so" "${2}"
+        ;;
+    vendor/lib64/vendor.somc.hardware.camera.*.so)
+        "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
+        ;;
+    vendor/bin/vendor.somc.camera.*.so)
         "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
         ;;
     esac
