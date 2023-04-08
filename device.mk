@@ -255,10 +255,7 @@ PRODUCT_PACKAGES += \
     init.qcom.msim.sh \
     init.qcom.rc \
     init.qcom.sh \
-    init.qcom.usb.rc \
-    init.qcom.usb.sh \
     init.recovery.qcom.rc \
-    init.qcom.usb.rc \
     init.target.rc \
     ueventd.qcom.rc \
     fstab.default \
@@ -461,7 +458,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/sony \
-    vendor/qcom/opensource/usb/etc
+    hardware/google/pixel \
+    hardware/google/interfaces
 
 # Sony charger interface
 PRODUCT_PACKAGES += \
