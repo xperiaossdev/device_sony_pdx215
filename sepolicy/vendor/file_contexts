@@ -108,5 +108,5 @@
 /(vendor|system/vendor)/bin/init\.gadgethal\.sh                                         u:object_r:init_gadgethal_exec:s0
 
 # USB
-/(vendor|system/vendor)/bin/hw/android\.hardware\.usb-service\.sony u:object_r:hal_usb_impl_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.usb\.gadget-service\.sony u:object_r:hal_usb_gadget_impl_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb-service\.sony                     u:object_r:hal_usb_impl_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb\.gadget-service\.sony             u:object_r:hal_usb_gadget_impl_exec:s0

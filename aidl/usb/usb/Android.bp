@@ -47,3 +47,4 @@ cc_binary {
         "android.frameworks.stats-V1-ndk",
         "pixelatoms-cpp",
     ],
+}
