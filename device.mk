@@ -323,10 +323,6 @@ PRODUCT_PACKAGES += \
     vendor.lineage.health \
     vendor.lineage.health-service.default
 
-# HDR
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media/libhdr_somc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/libhdr_somc.xml
-
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
