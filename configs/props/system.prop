@@ -24,6 +24,11 @@ bluetooth.profile.vcp.controller.enabled=true
 # Camera
 camera.disable_zsl_mode=true
 
+# RisingOS
+ro.apk_verity.mode=2
+ro.apex.updatable=false
+persist.sys.fw.bg_apps_limit=96
+
 # Charger
 ro.charger.disable_init_blank=true
 
