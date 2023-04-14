@@ -38,9 +38,6 @@ AB_OTA_PARTITIONS += \
     vendor_dlkm \
     vendor_boot
 
-# APEX
-OVERRIDE_TARGET_FLATTEN_APEX := true
-
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
