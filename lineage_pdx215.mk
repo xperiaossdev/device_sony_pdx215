@@ -18,8 +18,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common PixelExperience stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit some common RisingOS stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from device.mk
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
@@ -27,22 +27,34 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 # Environment Flags
 IS_PHONE := true
 TARGET_BUILD_WITH_LTO := true
+TARGET_SUPPORTS_QUICK_TAP := false
+TARGET_FACE_UNLOCK_SUPPORTED := true
 
 # Boot Animation
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1096
-TARGET_BOOT_ANIMATION_RES := 1080
-TARGET_BOOTANIMATION_HALF_RES := true
+SUSHI_BOOTANIMATION := 1080
 
-# PE-Specific Flags
-TARGET_USES_AOSP_RECOVERY := true
-TARGET_SUPPORTS_QUICK_TAP := false
+# Rising-Specific Flags
+TARGET_HAS_UDFPS := false
+TARGET_ENABLE_BLUR := true
+TARGET_USE_PIXEL_FINGERPRINT := false
+TARGET_BUILD_GRAPHENEOS_CAMERA := false
+TARGET_BUILD_APERTURE_CAMERA := false
+TARGET_EXCLUDES_AUDIOFX := true
+
+# Un|Officialify
+RISING_BUILDTYPE := COMMUNITY
+RISING_MAINTAINER := Your Local GitHub Retard
 
 # GMS
 WITH_GMS := true
+TARGET_CORE_GMS := true
+TARGET_OPTOUT_GOOGLE_TELEPHONY := true
+TARGET_ENABLE_PIXEL_GBOARD_PADDINGS := false
 
 # Device Identifiers
-PRODUCT_NAME := aosp_pdx215
+PRODUCT_NAME := lineage_pdx215
 PRODUCT_DEVICE := pdx215
 PRODUCT_MANUFACTURER := Sony
 PRODUCT_BRAND := Sony
