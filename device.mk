@@ -499,7 +499,7 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 WITH_DEXPREOPT_DEBUG_INFO := false
 
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Settings \
+    SettingsGoogle \
     SystemUIGoogle
 
 # Thermal
