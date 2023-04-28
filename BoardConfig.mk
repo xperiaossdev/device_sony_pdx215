@@ -38,9 +38,6 @@ AB_OTA_PARTITIONS += \
     vendor_dlkm \
     vendor_boot
 
-# APEX
-OVERRIDE_TARGET_FLATTEN_APEX := true
-
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
@@ -107,7 +104,7 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_NO_GCC := true
-TARGET_KERNEL_BUILD_HOST := PE
+TARGET_KERNEL_BUILD_HOST := Alpha
 TARGET_KERNEL_BUILD_USER := "YLGR"
 
 # Kernel Modules
@@ -197,7 +194,7 @@ TARGET_EXCLUDES_AUDIOFX := true
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix.xml \
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
-    vendor/aosp/config/device_framework_matrix.xml
+    vendor/lineage/config/device_framework_matrix.xml
 DEVICE_MATRIX_FILE += $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest.xml
 
@@ -210,8 +207,6 @@ BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 0x06000000
 # Reserve space for data encryption (109553123000-16384)
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 235769556992
-ifneq ($(WITH_GMS),true)
-endif
 BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT := -1
 BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 660602880
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := -1

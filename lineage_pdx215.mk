@@ -18,15 +18,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common PixelExperience stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit some common AlphaDroid stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from device.mk
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Environment Flags
 IS_PHONE := true
-TARGET_BUILD_WITH_LTO := true
 
 # Boot Animation
 TARGET_SCREEN_HEIGHT := 2560
@@ -34,15 +33,28 @@ TARGET_SCREEN_WIDTH := 1096
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_BOOTANIMATION_HALF_RES := true
 
-# PE-Specific Flags
-TARGET_USES_AOSP_RECOVERY := true
+# AlphaDroid-Specific Flags
+TARGET_HAS_UDFPS := false
+TARGET_ENABLE_BLUR := true
+USE_PIXEL_CHARGING := true
+TARGET_INCLUDE_MATLOG := false
+EXTRA_UDFPS_ANIMATIONS := false
+TARGET_USE_PIXEL_LAUNCHER := false
 TARGET_SUPPORTS_QUICK_TAP := false
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_INCLUDE_CARRIER_SETTINGS := false
+
+# Un|Officialify
+ALPHA_BUILD_TYPE := UNOFFICIAL
+ALPHA_MAINTAINER := Your Local GitHub Retard
 
 # GMS
-WITH_GMS := true
+WITH_GAPPS := true
+TARGET_CORE_GAPPS := true
+TARGET_GAPPS_ARCH := arm64
 
 # Device Identifiers
-PRODUCT_NAME := aosp_pdx215
+PRODUCT_NAME := lineage_pdx215
 PRODUCT_DEVICE := pdx215
 PRODUCT_MANUFACTURER := Sony
 PRODUCT_BRAND := Sony
