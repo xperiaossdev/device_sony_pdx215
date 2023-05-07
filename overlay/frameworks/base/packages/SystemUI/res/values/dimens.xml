@@ -16,9 +16,6 @@
 */
 -->
 <resources>
-    <!-- Removes the awful padding which was next to the battery icon/percentage. -->
-    <dimen name="ongoing_appops_dot_min_padding">0.0dip</dimen>
-
     <!-- the padding on the start of the statusbar -->
     <dimen name="status_bar_padding_start">5dp</dimen>
 
