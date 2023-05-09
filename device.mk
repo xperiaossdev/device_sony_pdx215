@@ -321,9 +321,7 @@ PRODUCT_PACKAGES += \
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl-qti \
-    android.hardware.health@2.1-service \
-    vendor.lineage.health \
-    vendor.lineage.health-service.default
+    android.hardware.health@2.1-service
 
 # HIDL
 PRODUCT_PACKAGES += \
