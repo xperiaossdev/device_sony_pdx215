@@ -243,8 +243,7 @@
         "12298",
         "9155",
         "2288"
-      ],
-      "ResetOnInit": true
+      ]
     },
     {
       "Name": "LLCCBWMinFreq",
@@ -254,8 +253,7 @@
         "6515",
         "3879",
         "762"
-      ],
-      "ResetOnInit": true
+      ]
     },
     {
       "Name": "DisplayWakeup",
