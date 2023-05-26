@@ -189,7 +189,7 @@ TARGET_USES_HWC2 := true
 TARGET_USES_ION := true
 
 # FileSystem
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/filesystem/config.fs
 
 # Exclude AudioFX
 TARGET_EXCLUDES_AUDIOFX := true
