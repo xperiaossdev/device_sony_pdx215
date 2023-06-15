@@ -227,6 +227,14 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
+
+# Bluetooth LDAC Blobs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/bluetooth/libs/lib/libldacBT_abr.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libldacBT_abr.so \
+    $(LOCAL_PATH)/configs/bluetooth/libs/lib/libldacBT_enc.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libldacBT_enc.so \
+    $(LOCAL_PATH)/configs/bluetooth/libs/lib64/libldacBT_abr.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libldacBT_abr.so \
+    $(LOCAL_PATH)/configs/bluetooth/libs/lib64/libldacBT_enc.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libldacBT_enc.so
+
 # Boot Control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
