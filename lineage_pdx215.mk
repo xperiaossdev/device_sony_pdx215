@@ -48,9 +48,7 @@ TARGET_INCLUDE_CARRIER_SETTINGS := false
 ALPHA_BUILD_TYPE := UNOFFICIAL
 ALPHA_MAINTAINER := Your Local GitHub Retard
 
-# GMS
-WITH_GAPPS := true
-TARGET_CORE_GAPPS := true
+# GMS Architecture
 TARGET_GAPPS_ARCH := arm64
 
 # Device Identifiers
