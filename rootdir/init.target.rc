@@ -1,4 +1,3 @@
-
 # Copyright (c) 2019-2020, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -44,7 +43,7 @@ on init
     write /dev/cpuset/system-background/cpus 0-5
     write /dev/cpuset/restricted/cpus 2-5
 
-    # Scheduler uclamp
+    # Scheduler UClamp
     mkdir /dev/cpuctl/foreground
     mkdir /dev/cpuctl/background
     mkdir /dev/cpuctl/top-app
@@ -103,7 +102,8 @@ on late-fs
 
 on post-fs-data
     mkdir /vendor/data/tombstones 0771 system system
-    # Enable WLAN cold boot calibration
+
+    # Enable WLAN calibration on a cold boot
     write /sys/devices/platform/soc/b0000000.qcom,cnss-qca6490/fs_ready 1
 
 on early-boot
@@ -138,17 +138,41 @@ on boot
     chmod 0660 /sys/devices/platform/soc/a94000.i2c/i2c-2/2-0062/trusted_touch_event
     chown system /sys/devices/system/cpu/hyp_core_ctl/enable
     chown system /sys/devices/system/cpu/hyp_core_ctl/hcc_min_freq
-    #USB controller configuration
+
+    # Powerhint Nodes
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+    chown system system /sys/devices/system/cpu/cpu7/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu7/cpufreq/scaling_min_freq
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.min
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chown system system /sys/class/kgsl/kgsl-3d0/idle_timer
+    chown system system /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hyst_trigger_count
+    chown system system /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hist_memory
+    chown system system /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/bw_hwmon/hyst_length
+    chown system system /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/min_freq
+    chown system system /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+    chown system system /sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/sde-crtc-0/early_wakeup
+
+    # USB controller configuration
     setprop vendor.usb.rndis.func.name "gsi"
     setprop vendor.usb.rmnet.func.name "gsi"
     setprop vendor.usb.rmnet.inst.name "rmnet"
     setprop vendor.usb.dpl.inst.name "dpl"
     setprop vendor.usb.qdss.inst.name "qdss_mdm"
     setprop vendor.usb.controller a600000.dwc3
-    #Load WLAN driver
+
+    # Load WLAN driver
     exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules/ qca_cld3_wlan qca_cld3_qca6390
     exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules/5.4-gki qca_cld3_wlan qca_cld3_qca6390
-    #Allow access to memory hotplug device attributes
+
+    # Allow access to memory hotplug device attributes
     chown system system /sys/kernel/mem-offline/anon_migrate
 
 on property:vendor.display.lcd_density=560
@@ -176,13 +200,13 @@ service vendor.lowi /vendor/bin/lowirpcd
    group system wakelock
    capabilities BLOCK_SUSPEND
 
-#pd-mapper
+# PD Mapper
 service vendor.pd_mapper /vendor/bin/pd-mapper
     class core
     user system
     group system
 
-#Peripheral manager
+# Peripheral Manager Service
 service vendor.per_mgr /vendor/bin/pm-service
     class core
     user system
@@ -194,11 +218,6 @@ service vendor.per_proxy /vendor/bin/pm-proxy
     user system
     group system
     disabled
-
-#service vendor.mdm_helper /vendor/bin/mdm_helper
-#    class core
-#    group system wakelock
-#    disabled
 
 service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
     class core
@@ -219,7 +238,7 @@ service vendor.cnss_diag /system/vendor/bin/cnss_diag -q -f -t HELIUM
    group system wifi inet sdcard_rw media_rw diag
    oneshot
 
-#fan-controller
+# Fan Control
 service fan_control_turn_on /vendor/bin/fan_control 1
     class late_start
     user root
