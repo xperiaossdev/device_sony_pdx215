@@ -52,7 +52,7 @@ TARGET_SUPPORTS_NEXT_GEN_ASSISTANT := true
 # Un|Officialify
 CHERISH_BUILD_TYPE := UNOFFICIAL
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.cherish.maintainer=Your Local GitHub Retard
+    ro.cherish.maintainer=
 
 # GMS
 WITH_GMS := true
