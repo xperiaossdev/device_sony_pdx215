@@ -515,7 +515,7 @@ WITH_DEXPREOPT_DEBUG_INFO := false
 
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
-    SystemUIGoogle
+    SystemUI
 
 # Thermal
 ifeq ($(TARGET_USE_QTI_THERMAL_SERVICE),true)
