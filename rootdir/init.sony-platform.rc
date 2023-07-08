@@ -219,6 +219,3 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
     disabled
     oneshot
     keycodes 114 115 116
-
-on property:ro.boot.verifiedbootstate=orange
-    setprop persist.sys.usb.config adb
