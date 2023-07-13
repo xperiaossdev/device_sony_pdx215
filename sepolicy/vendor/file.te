@@ -20,3 +20,6 @@ type sysfs_sects, fs_type, sysfs_type;
 
 type sysfs_tsp, fs_type, sysfs_type;
 type sysfs_dp, fs_type, sysfs_type;
+
+# Power HAL
+type vendor_sysfs_msm_subsys, fs_type, sysfs_type;
