@@ -32,6 +32,10 @@ genfscon sysfs /devices/platform/soc/soc:qcom,smp2p-cdsp/wakeup/wakeup          
 genfscon sysfs /devices/platform/soc/soc:qcom,smp2p-npu/wakeup/wakeup               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/98c000.i2c/i2c-2/2-003b/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/88c000.i2c/i2c-7/7-0040/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/sde-crtc-0/early_wakeup          u:object_r:vendor_sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/2c00000.qcom,kgsl-3d0          u:object_r:vendor_sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw          u:object_r:vendor_sysfs_msm_subsys:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw          u:object_r:vendor_sysfs_msm_subsys:s0
 genfscon sysfs /devices/platform/soc/1c10000.qcom,pcie/pci0002:00/0002:00:00.0/0002:01:00.0/0306_02.01.00_EFS/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/98c000.i2c/i2c-2/2-003b/power_supply/wireless/wakeup                                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/1101_00.01.00/wakeup/wakeup     u:object_r:sysfs_wakeup:s0
