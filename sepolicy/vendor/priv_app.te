@@ -1,1 +1,4 @@
 allow priv_app zygote:unix_stream_socket getopt;
+
+# ICharger
+allow priv_app default_android_service:service_manager find ;
