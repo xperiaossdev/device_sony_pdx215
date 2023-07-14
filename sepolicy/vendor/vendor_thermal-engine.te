@@ -7,3 +7,6 @@ get_prop(vendor_thermal-engine, hwservicemanager_prop)
 
 allow vendor_thermal-engine hal_idd_hwservice:hwservice_manager find;
 
+allow init vendor_thermal-engine:process2 nosuid_transition ;
+
+allow init vendor_thermal-engine_exec:file execute_no_trans;
