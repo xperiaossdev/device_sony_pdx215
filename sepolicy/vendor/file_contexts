@@ -52,9 +52,6 @@
 # Fingerprint devices
 /dev/esfp0        u:object_r:etsd_device:s0
 
-# Health HAL
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.health-service\.default u:object_r:hal_lineage_health_default_exec:s0
-
 # Sony camera devices
 /dev/sony_camera0   u:object_r:sony_camera_device:s0
 /dev/sony_camera1   u:object_r:sony_camera_device:s0
