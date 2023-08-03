@@ -41,8 +41,6 @@ allow hal_power_default {
   sysfs
 }:file write;
 
-allow hal_power_default hal_power_default:capability { dac_override };
-
 allow hal_power_default vendor_sysfs_msm_subsys:file { open write };
 
 set_prop(hal_power_default, vendor_power_prop)
