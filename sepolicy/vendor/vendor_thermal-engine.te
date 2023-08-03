@@ -1,12 +1,15 @@
 allow vendor_thermal-engine sysfs_battchg_ext:dir { ioctl read getattr lock open watch watch_reads search };
 allow vendor_thermal-engine sysfs_battchg_ext:file { ioctl read write getattr lock append map open watch watch_reads };
 
-hwbinder_use(vendor_thermal-engine)
-binder_call(vendor_thermal-engine, hal_idd_default)
-get_prop(vendor_thermal-engine, hwservicemanager_prop)
+hwbinder_use(vendor_thermal-engine);
+binder_call(vendor_thermal-engine, hal_idd_default);
+get_prop(vendor_thermal-engine, hwservicemanager_prop);
 
 allow vendor_thermal-engine hal_idd_hwservice:hwservice_manager find;
 
-allow init vendor_thermal-engine:process2 nosuid_transition ;
+allow init vendor_thermal-engine:process2 nosuid_transition;
 
-allow init vendor_thermal-engine_exec:file execute_no_trans;
+allow vendor_thermal-engine vendor_thermal-engine_exec:file execute_no_trans;
+
+allow init vendor_thermal-engine:process transition;
+allow init vendor_thermal-engine_exec:file { read open };

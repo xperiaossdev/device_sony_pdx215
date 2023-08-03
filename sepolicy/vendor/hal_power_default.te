@@ -30,14 +30,8 @@ allow hal_power_default {
 }:dir search;
 
 allow hal_power_default {
-  hal_power_default
-}:capability dac_override;
-
-allow hal_power_default {
   proc
 }:file open;
-
-allow hal_power_default hal_power_default:capability { dac_override };
 
 allow hal_power_default vendor_sysfs_msm_subsys:file { open write };
 

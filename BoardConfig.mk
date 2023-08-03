@@ -273,9 +273,6 @@ include hardware/sony/sepolicy/qti/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 PRODUCT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
-# SELinux Neverallows
-SELINUX_IGNORE_NEVERALLOWS := true
-
 # SurfaceFlinger
 TARGET_USE_AOSP_SURFACEFLINGER := true
 
