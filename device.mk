@@ -33,7 +33,7 @@ $(call inherit-product, vendor/sony/sagami/common/common-vendor.mk)
 $(call inherit-product, vendor/sony/sagami/pdx215/pdx215-vendor.mk)
 
 # Inherit from sony extra
-$(call inherit-product-if-exists, vendor/sony/extra-sagami/extra.mk)
+$(call inherit-product, vendor/sony/extra-sagami/extra.mk)
 
 # VNDK
 PRODUCT_SHIPPING_API_LEVEL := 30
