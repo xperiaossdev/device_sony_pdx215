@@ -275,8 +275,15 @@ BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 PRODUCT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
 # SELinux Neverallows
-ifeq ($(TARGET_BUILD_VARIANT),userdebug,eng)
+ifdef SELINUX_IGNORE_NEVERALLOWS
+else
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
 SELINUX_IGNORE_NEVERALLOWS := true
+endif
+
+ifeq ($(TARGET_BUILD_VARIANT),eng)
+SELINUX_IGNORE_NEVERALLOWS := true
+endif
 endif
 
 # SurfaceFlinger

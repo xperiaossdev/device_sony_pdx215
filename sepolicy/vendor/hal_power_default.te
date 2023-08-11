@@ -37,6 +37,7 @@ allow hal_power_default vendor_sysfs_msm_subsys:file { open write };
 
 allow hal_power_default sysfs:file { open write };
 
+# Only allow dac_override for userdebug or eng builds
 userdebug_or_eng(`
 allow hal_power_default hal_power_default:capability dac_override;
 ')
